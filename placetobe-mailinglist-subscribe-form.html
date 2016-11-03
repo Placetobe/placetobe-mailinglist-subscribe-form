@@ -139,6 +139,7 @@ Placetobe Mailinglist Subscribe Form
         sent: {
           type: Boolean,
           value: false,
+          readOnly: true,
           notify: true        
         }
 
@@ -163,16 +164,18 @@ Placetobe Mailinglist Subscribe Form
       },
 
       _handleRequestSent: function(evt) {
+        this.fire('subscribing');
         this._pending = true;
       },
 
       _handleResponse: function(evt) {
+        this.fire('subscribed');
         this._pending = false;
         this._setSent(true);
       },
 
       _handleResponseError: function(evt) {
-        alert('Sorry, er is iets ')
+        this.fire('subscribe-error');
         this._pending = false;
       }
 
