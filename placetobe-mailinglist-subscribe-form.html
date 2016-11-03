@@ -1,0 +1,122 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+<link rel="import" href="../placetobe-behaviors/placetobe-styles-behavior.html">
+<link rel="import" href="../placetobe-styles/placetobe-styles.html">
+
+<!--
+`placetobe-mailinglist-subscribe-form`
+Placetobe Mailinglist Subscribe Form
+
+@demo demo/index.html 
+-->
+
+<dom-module id="placetobe-mailinglist-subscribe-form">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      :host section form {
+        @apply --placetobe-flex-layout--horizontal;
+        @apply --placetobe-flex-align--center;
+        @apply --placetobe-cross-align--center;
+      }
+
+      section input {
+        @apply --placetobe-border-box;
+      }
+
+      section input[type="email"] {
+        @apply --placetobe-textinput;
+        @apply --placetobe-flex-item--2;
+        border: 1px solid var(--placetobe-color-gray);
+        height: 54px;
+        margin-right: 9px;
+      }
+
+      section input[type="submit"] {
+        @apply --placetobe-flex-item--none;
+        @apply --placetobe-default-button;
+      }
+
+      section input[type="submit"][disabled] {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+    </style>
+
+    <iron-ajax
+      id="subscribe"
+      url="[[apiEndpoint]]/placetobe/[[userRole]]/mailinglist"
+      body='{"emailAddress": "{{emailAddress}}"}'
+      handle-as="json"
+      method="POST"
+      last-response="{{_apiData}}"
+      debounce-duration="3000"
+    ></iron-ajax>
+
+    <section>
+      <form action="#" on-submit="_handleSubmit">
+        <input
+          type="email"
+          name="email"
+          value="{{emailAddress::input}}"
+          placeholder="Email Adres"
+          required
+        >
+        <input
+          type="submit"
+          disabled$="[[!emailAddress]]"
+          value="subscribe"
+        >
+      </form>
+    </section>
+
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'placetobe-mailinglist-subscribe-form',
+      behaviors: [PlacetobeStylesBehavior],
+
+      properties: {
+
+        apiEndPoint: {
+          type: String,
+          value: null
+        },
+
+        userRole: {
+          type: String,
+          value: null
+        },
+
+        emailAddress: {
+          type: String,
+          value: null,
+          notify: true
+        },
+
+        name: {
+          type: String,
+          value: null,
+          notify: true
+        }
+
+      },
+
+      _handleSubmit: function(evt) {
+        evt.preventDefault();
+        this.subscribe();
+      },
+
+      subscribe: function() {
+        if(!this.emailAddress) return;
+        this.$.subscribe.generateRequest();
+      }
+
+    });
+  </script>
+</dom-module>
