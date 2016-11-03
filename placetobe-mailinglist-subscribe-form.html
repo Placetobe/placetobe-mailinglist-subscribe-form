@@ -68,7 +68,7 @@ Placetobe Mailinglist Subscribe Form
         <input
           type="submit"
           disabled$="[[!emailAddress]]"
-          value="subscribe"
+          value="[[buttonLabel]]"
         >
       </form>
     </section>
@@ -103,6 +103,11 @@ Placetobe Mailinglist Subscribe Form
           type: String,
           value: null,
           notify: true
+        },
+
+        buttonLabel: {
+          type: String,
+          value: "Hou me op de hoogte"
         }
 
       },
