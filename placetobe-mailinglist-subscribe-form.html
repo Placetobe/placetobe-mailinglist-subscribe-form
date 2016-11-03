@@ -19,16 +19,20 @@ Placetobe Mailinglist Subscribe Form
       }
 
       :host section {
-        height: 54px;
         @apply --placetobe-flex-layout--horizontal;    
         @apply --placetobe-cross-align--center;
       }
 
       :host section form {
         @apply --placetobe-flex-layout--horizontal;
-        @apply --placetobe-flex-align--center;
+        @apply --placetobe-flex-align--start;
         @apply --placetobe-cross-align--center;
         @apply --placetobe-flex-item--1;
+        flex-wrap: wrap;
+      }
+
+      :host section form > * {
+        margin: 9px 0;
       }
 
       section input[type="email"] {
@@ -38,6 +42,7 @@ Placetobe Mailinglist Subscribe Form
         height: 54px;
         margin-right: 9px;
         @apply --placetobe-border-box;
+        min-width: calc( var(--placetobe-column-width) / 3 * 2);
       }
 
       :host form[hidden] {
@@ -65,7 +70,7 @@ Placetobe Mailinglist Subscribe Form
 
     <section>
 
-      <form on-submit="_handleSubmit" hidden$="[[_sent]]">
+      <form on-submit="_handleSubmit" hidden$="[[sent]]">
         <input
           type="email"
           name="email"
@@ -81,7 +86,7 @@ Placetobe Mailinglist Subscribe Form
 
       </form>
 
-      <h6 hidden$="[[!_sent]]">[[successMessage]]</h6>
+      <h6 hidden$="[[!sent]]">[[successMessage]]</h6>
 
     </section>
 
@@ -131,9 +136,10 @@ Placetobe Mailinglist Subscribe Form
           value: false
         },
 
-        _sent: {
+        sent: {
           type: Boolean,
-          value: false          
+          value: false,
+          notify: true        
         }
 
       },
@@ -162,7 +168,7 @@ Placetobe Mailinglist Subscribe Form
 
       _handleResponse: function(evt) {
         this._pending = false;
-        this._sent = true;
+        this._setSent(true);
       },
 
       _handleResponseError: function(evt) {
