@@ -6,7 +6,8 @@
     "polymer": "Polymer/polymer#^1.6.0",
     "iron-ajax": "PolymerElements/iron-ajax#^1.4.3",
     "placetobe-behaviors": "Placetobe/placetobe-behaviors",
-    "placetobe-styles": "Placetobe/placetobe-styles"
+    "placetobe-styles": "Placetobe/placetobe-styles",
+    "placetobe-button": "Placetobe/placetobe-button"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
