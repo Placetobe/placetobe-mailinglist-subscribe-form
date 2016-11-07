@@ -52,6 +52,10 @@ Placetobe Mailinglist Subscribe Form
         width: 100%;
       }
 
+      section input[type="email"][data-invalid] {
+        background-color: var(--placetobe-color-red);
+      }
+
       :host form[hidden] {
         display: none;
       }
@@ -79,10 +83,12 @@ Placetobe Mailinglist Subscribe Form
 
       <form on-submit="_handleSubmit" hidden$="[[sent]]">
         <input
+          id="emailAddress"
           type="email"
           name="email"
           value="{{emailAddress::input}}"
           placeholder="Email Adres"
+          data-invalid$="[[!validEmailAddress]]"
           required
         >
 
@@ -121,6 +127,11 @@ Placetobe Mailinglist Subscribe Form
           type: String,
           value: null,
           notify: true
+        },
+
+        validEmailAddress: {
+          type: Boolean,
+          computed: '_computeValidEmailAddress(emailAddress)'
         },
 
         validFormData: {
@@ -164,6 +175,11 @@ Placetobe Mailinglist Subscribe Form
 
       _handleButtonTap: function() {
         this.subscribe();
+      },
+
+      _computeValidEmailAddress: function(emailAddress) {
+        if(!emailAddress) return true;
+        return (this.$.emailAddress.checkValidity() && emailAddress.length > 0);
       },
 
       _computeValidFormData: function(emailAddress, pending) {
