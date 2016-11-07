@@ -49,8 +49,7 @@ Placetobe Mailinglist Subscribe Form
         border: 1px solid var(--placetobe-color-gray);
         height: 54px;
         margin-right: 9px;
-        width: calc( var(--placetobe-column-width) / 3 * 2);
-        max-width: 100%;
+        width: 100%;
       }
 
       :host form[hidden] {
@@ -142,6 +141,11 @@ Placetobe Mailinglist Subscribe Form
         _pending: {
           type: Boolean,
           value: false
+        },
+
+        _apiData: {
+          type: String.
+          value: null
         },
 
         sent: {
