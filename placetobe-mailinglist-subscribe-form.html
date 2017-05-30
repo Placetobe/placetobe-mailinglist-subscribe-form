@@ -1,5 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../iron-ajax/iron-ajax.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html" async>
 <link rel="import" href="../placetobe-behaviors/placetobe-styles-behavior.html">
 <link rel="import" href="../placetobe-styles/placetobe-styles.html">
 <link rel="import" href="../placetobe-button/placetobe-button.html">
@@ -56,14 +56,13 @@ Placetobe Mailinglist Subscribe Form
         background-color: var(--placetobe-color-red);
       }
 
-      :host form[hidden] {
-        display: none;
-      }
-
       :host h6 {
         @apply --placetobe-font-body-serif-bold;
       }
 
+      [hidden] {
+        display: none !important;
+      }
     </style>
 
     <iron-ajax
