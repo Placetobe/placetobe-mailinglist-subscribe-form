@@ -56,14 +56,13 @@ Placetobe Mailinglist Subscribe Form
         background-color: var(--placetobe-color-red);
       }
 
-      :host form[hidden] {
-        display: none;
-      }
-
       :host h6 {
         @apply --placetobe-font-body-serif-bold;
       }
 
+      [hidden] {
+        display: none !important;
+      }
     </style>
 
     <iron-ajax
