@@ -81,7 +81,7 @@ Placetobe Mailinglist Subscribe Form
 
     <section>
 
-      <form on-submit="_handleSubmit" hidden$="[[sent]]">
+      <form id="form" on-submit="_handleSubmit" hidden$="[[sent]]">
         <input
           id="emailAddress"
           type="email"
@@ -183,7 +183,7 @@ Placetobe Mailinglist Subscribe Form
       },
 
       _computeValidFormData: function(emailAddress, pending) {
-        return (this.$$('form').checkValidity() && (!pending));
+        return (this.$$('#form') && this.$$('#form').checkValidity() && (!pending));
       },
 
       subscribe: function() {
