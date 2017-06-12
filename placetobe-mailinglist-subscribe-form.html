@@ -42,7 +42,7 @@ Placetobe Mailinglist Subscribe Form
         margin: 9px 0;
       }
 
-      section input[type="email"] {
+      section input {
         @apply --placetobe-textinput;
         @apply --placetobe-flex-item--2;
         @apply --placetobe-border-box;
@@ -68,7 +68,7 @@ Placetobe Mailinglist Subscribe Form
     <iron-ajax
       id="subscribe"
       url="[[apiEndpoint]]/placetobe/[[userRole]]/mailinglist"
-      body='{"emailAddress": "{{emailAddress}}"}'
+      body='{"emailAddress": "[[emailAddress]]", "phoneNumber": "[[phoneNumber]]"}'
       handle-as="json"
       method="POST"
       last-response="{{_apiData}}"
@@ -89,6 +89,12 @@ Placetobe Mailinglist Subscribe Form
           placeholder="Email Adres"
           data-invalid$="[[!validEmailAddress]]"
           required
+        >
+        <input
+          id="phoneNumber"
+          name="telefoon"
+          value="{{phoneNumber::input}}"
+          placeholder="Telefoon (optioneel)"
         >
 
         <placetobe-button
@@ -123,6 +129,12 @@ Placetobe Mailinglist Subscribe Form
         },
 
         emailAddress: {
+          type: String,
+          value: null,
+          notify: true
+        },
+
+        phoneNumber: {
           type: String,
           value: null,
           notify: true
